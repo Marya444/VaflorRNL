@@ -1,9 +1,31 @@
-import React from 'react'
+import { use } from "react";
 
-const AlertMessage = () => {
-  return (
-    <div>AlertMessage</div>
-  )
+interface AlertMessageProps {
+  message: string;
+  isSuccess: boolean;
+  isVisible: boolean;
+  onClose: () => void;
 }
+const AlertMessage = ({
+  message,
+  isSuccess,
+  isVisible,
+  onClose,
+}: AlertMessageProps) => {
+  useEffect(() => {
+    if (isVisible) {
+      const timer = setTimeout(() => {
+        onClose();
+      }, 3000);
+      return () => clearTimeout(timer); // Cleanup the timer on unmount or when isVisible changes
+    }
+  }, [isVisible, onClose]);
+};
 
-export default AlertMessage
+return (
+  <div className="alert alert-success" role="alert">
+    A simple success alert—check it out!
+  </div>
+);
+
+export default AlertMessage;
