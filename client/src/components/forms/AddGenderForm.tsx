@@ -11,6 +11,11 @@ const AddGenderForm = () => {
             name="gender"
           />
         </div>
+        <div className="d-flex justify-content-end">
+          <button type="submit" className="btn btn-primary">
+            SAVE
+          </button>
+        </div>
       </div>
     </>
   );
