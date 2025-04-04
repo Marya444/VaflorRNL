@@ -40,12 +40,12 @@ const AddGenderForm = () => {
         } else {
           setState((prevState) => ({
             ...prevState,
-            errorMessage: "Error: Unable to store gender",
+            errorMessage: "Unexpected status error during storing gender: " + res.data.status,
           }));
         }
       })
       .catch((error) => {
-        if (error.response && error.response.status === 422) {
+        if (error.response.status === 422) {
           setState((prevState) => ({
             ...prevState,
             errors: error.response.data.errors || {}, 

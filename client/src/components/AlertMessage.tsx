@@ -1,4 +1,4 @@
-import { use } from "react";
+import { useEffect } from "react";
 
 interface AlertMessageProps {
   message: string;
@@ -6,6 +6,7 @@ interface AlertMessageProps {
   isVisible: boolean;
   onClose: () => void;
 }
+
 const AlertMessage = ({
   message,
   isSuccess,
@@ -17,15 +18,23 @@ const AlertMessage = ({
       const timer = setTimeout(() => {
         onClose();
       }, 3000);
-      return () => clearTimeout(timer); // Cleanup the timer on unmount or when isVisible changes
+
+      return () => clearTimeout(timer);
     }
   }, [isVisible, onClose]);
-};
 
-return (
-  <div className="alert alert-success" role="alert">
-    A simple success alert—check it out!
-  </div>
-);
+  return (
+    <>
+      <div
+        className={`alert ${isSuccess ? "alert-success" : "alert-danger"} ${
+          isVisible ? "show" : "d-none"
+        }`}
+        role="alert"
+      >
+        {message}
+      </div>
+    </>
+  );
+};
 
 export default AlertMessage;
