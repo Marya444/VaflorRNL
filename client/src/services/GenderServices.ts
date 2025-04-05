@@ -1,4 +1,4 @@
-import AxiosInstance from "../style/AxiosInstance";
+import AxiosInstance from "../../AxiosInstance";
 
 const GenderServices = {
    storeGender: async (data: any) => {

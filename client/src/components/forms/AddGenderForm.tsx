@@ -31,17 +31,16 @@ const AddGenderForm = () => {
     GenderServices.storeGender({ gender: state.gender })
       .then((res) => {
         if (res.data.status === 200) {
-          setState({
-            loadingStore: false,
-            gender: "",
-            errorMessage: "",
-            errors: {} as GenderFieldErrors, 
-          });
-        } else {
           setState((prevState) => ({
             ...prevState,
-            errorMessage: "Unexpected status error during storing gender: " + res.data.status,
-          }));
+            gender: "",
+            errors: {} as GenderFieldErrors, 
+        }));
+        } else {
+          console.error(
+            "Unexpected status error during storing gender: ",
+            res.status
+          );
         }
       })
       .catch((error) => {
