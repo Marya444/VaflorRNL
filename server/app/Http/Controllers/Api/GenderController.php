@@ -14,13 +14,13 @@ class Gender extends Controller
         ], 200);
     }
 
-    // public function getGender($genderId)
-    // {
-    //     $gender = Gender::find($genderId);
-    //     return response()->json([
-    //         'gender' => $gender
-    //     ], 200);
-    // }
+    public function getGender($genderId)
+    {
+        $gender = Gender::find($genderId);
+        return response()->json([
+            'gender' => $gender
+        ], 200);
+    }
 
     public function storeGender(Request $request)
     {
