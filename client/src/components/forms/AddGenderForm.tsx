@@ -28,14 +28,15 @@ const AddGenderForm = () => {
       errorMessage: "",
     }));
 
-    GenderServices.storeGender({ gender: state.gender })
+    GenderServices.storeGender(state)
+    
       .then((res) => {
         if (res.data.status === 200) {
           setState((prevState) => ({
             ...prevState,
             gender: "",
-            errors: {} as GenderFieldErrors, 
-        }));
+            errors: {} as GenderFieldErrors,
+          }));
         } else {
           console.error(
             "Unexpected status error during storing gender: ",
@@ -43,11 +44,12 @@ const AddGenderForm = () => {
           );
         }
       })
+
       .catch((error) => {
         if (error.response.status === 422) {
           setState((prevState) => ({
             ...prevState,
-            errors: error.response.data.errors || {}, 
+            errors: error.response.data.errors || {},
           }));
         } else {
           ErrorHandler(error, null);

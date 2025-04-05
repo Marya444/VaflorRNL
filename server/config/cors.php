@@ -1,4 +1,4 @@
-/*************  ✨ Codeium Command ⭐  *************/
+
 <?php
 
 return [
