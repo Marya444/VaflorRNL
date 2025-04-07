@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Gender;
@@ -9,7 +10,7 @@ class GenderController extends Controller
 {
     public function loadGenders()
     {
-        $genders = GenderController::all();
+        $genders = Gender::all();
         return response()->json([
             'genders' => $genders
         ], 200);
@@ -17,7 +18,7 @@ class GenderController extends Controller
 
     public function getGender($genderId)
     {
-        $gender = GenderController::find($genderId);
+        $gender = Gender::find($genderId);
         return response()->json([
             'gender' => $gender
         ], 200);

@@ -22,5 +22,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "AxiosInstance.tsx"]
+  "include": ["src", "src/AxiosInstance.tsx"]
 }

@@ -2,8 +2,13 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import GenderServices from "../../services/GenderServices";
 import ErrorHandler from "../handler/ErrorHandler";
 import GenderFieldErrors from "../../interfaces/GenderFieldErrors";
+import SpinnerSmall from "../SpinnerSmall";
 
-const AddGenderForm = () => {
+interface AddGenderFormProps {
+  onGenderAdded: (message: string) => void;
+}
+
+const AddGenderForm = ({onGenderAdded }: AddGenderFormProps) => {
   const [state, setState] = useState({
     loadingStore: false,
     gender: "",
@@ -22,21 +27,22 @@ const AddGenderForm = () => {
 
   const handleStoreGender = (e: FormEvent) => {
     e.preventDefault();
+
     setState((prevState) => ({
       ...prevState,
       loadingStore: true,
-      errorMessage: "",
     }));
 
     GenderServices.storeGender(state)
-    
+
       .then((res) => {
-        if (res.data.status === 200) {
+        if (res.status === 200) {
           setState((prevState) => ({
             ...prevState,
             gender: "",
             errors: {} as GenderFieldErrors,
           }));
+          onGenderAdded(res.data.message);
         } else {
           console.error(
             "Unexpected status error during storing gender: ",
@@ -49,7 +55,7 @@ const AddGenderForm = () => {
         if (error.response.status === 422) {
           setState((prevState) => ({
             ...prevState,
-            errors: error.response.data.errors || {},
+            errors: error.response.data.errors,
           }));
         } else {
           ErrorHandler(error, null);
@@ -67,11 +73,11 @@ const AddGenderForm = () => {
     <>
       <form onSubmit={handleStoreGender}>
         <div className="form-group">
-          <div className="mb-3">
+          <div className="mb-3 w-100">
             <label htmlFor="gender">Gender</label>
             <input
               type="text"
-              className={`form-control ${
+              className={`form-control text-center ${
                 state.errors.gender ? "is-invalid" : ""
               }`}
               id="gender"
@@ -80,27 +86,25 @@ const AddGenderForm = () => {
               onChange={handleInputChange}
             />
             {state.errors.gender && (
-              <div className="invalid-feedback">{state.errors.gender}</div>
+              <p className="text-danger">{state.errors.gender[0]}</p>
             )}
           </div>
-          {state.errorMessage && (
-            <p className="text-danger">{state.errorMessage}</p>
-          )}
-        </div>
-        <div className="d-flex justify-content-end">
-          {state.loadingStore ? (
-            <button className="btn btn-primary" type="button" disabled>
-              <span
-                className="spinner-border spinner-border-sm"
-                aria-hidden="true"
-              ></span>
-              <span role="status">Loading...</span>
+
+          <div className="d-flex justify-content-end">
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={state.loadingStore}
+            >
+              {state.loadingStore ? (
+                <>
+                  <SpinnerSmall /> Loading...
+                </>
+              ) : (
+                " Save"
+              )}
             </button>
-          ) : (
-            <button type="submit" className="btn btn-primary">
-              Save
-            </button>
-          )}
+          </div>
         </div>
       </form>
     </>
