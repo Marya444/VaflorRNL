@@ -1,22 +1,58 @@
-import AddGenderForm from "../../components/forms/AddGenderForm"
+import AddGenderForm from "../../components/forms/AddGenderForm";
 import GenderTable from "../../tables/GenderTable";
-import MainLayout from "./layout/MainLayout"
+import { useState } from "react";
+import MainLayout from "./layout/MainLayout";
+import AlertMessage from "../../components/AlertMessage";
+
 const Genders = () => {
-    const content = (
 
+  const[refreshGenders, setRefreshGenders] = useState(false);
+
+  const [message, setMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleShowAlertMessage = (
+    message: string,
+    isSuccess: boolean,
+    isVisible: boolean
+  ) => {
+    setMessage(message);
+    setIsSuccess(isSuccess);
+    setIsVisible(isVisible);
+  };
+
+  const handleCloseAlertMessage = () => {
+    setMessage("");
+    setIsSuccess(false);
+    setIsVisible(false);
+  };
+
+  const content = (
     <>
-    <div className="row">
-        <div className="col-md-4">
-            <AddGenderForm />
-            </div>
-        <div className="col-md 8">
-         < GenderTable />
+      <AlertMessage
+        message={message}
+        isSuccess={isSuccess}
+        isVisible={isVisible}
+        onClose={handleCloseAlertMessage}
+      />
+      <div className="row">
+        <div className="col-md-3">
+          <AddGenderForm
+            onGenderAdded={(message) => {
+              handleShowAlertMessage(message, true, true);
+              setRefreshGenders(!refreshGenders);
+            }}
+          />
         </div>
-    </div>
+        <div className="col-md-9">
+          <GenderTable refreshGenders={refreshGenders}/>
+        </div>
+      </div>
     </>
+  );
 
-)
   return <MainLayout content={content} />;
-}
+};
 
-export default Genders
+export default Genders;

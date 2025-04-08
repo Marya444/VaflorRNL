@@ -4,7 +4,11 @@ import GenderServices from "../services/GenderServices";
 import ErrorHandler from "../components/handler/ErrorHandler";
 import Spinner from "../components/Spinner";
 
-const GenderTable = () => {
+interface GenderTableProps {
+  refreshGenders:boolean;
+}
+
+const GenderTable = ({refreshGenders}: GenderTableProps) => {
   const [state, setState] = useState({
     loadingGenders: true,
     genders: [] as Genders[],
@@ -40,7 +44,7 @@ const GenderTable = () => {
 
   useEffect(() => {
     handleLoadGenders();
-  }, []);
+  }, [refreshGenders]);
 
   return (
     <>
