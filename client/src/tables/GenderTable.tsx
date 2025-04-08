@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Genders from "../interfaces/Genders";
 import GenderServices from "../services/GenderServices";
 import ErrorHandler from "../components/handler/ErrorHandler";
+import Spinner from "../components/Spinner";
 
 const GenderTable = () => {
   const [state, setState] = useState({
@@ -52,22 +53,30 @@ const GenderTable = () => {
           </tr>
         </thead>
         <tbody>
-          {state.genders.map((gender, index) => (
+          {state.loadingGenders ? (
             <tr className="align-middle">
-              <td>{index + 1}</td>
-              <td>{gender.gender}</td>
-              <td>
-                <div className="btn-group">
-                  <button type="button" className="btn btn-success">
-                    Edit
-                  </button>
-                  <button type="button" className="btn btn-danger">
-                    Delete
-                  </button>
-                </div>
+              <td colSpan={3} className="text-center">
+                <Spinner />
               </td>
             </tr>
-          ))}
+          ) : (
+            state.genders.map((gender, index) => (
+              <tr className="align-middle">
+                <td>{index + 1}</td>
+                <td>{gender.gender}</td>
+                <td>
+                  <div className="btn-group">
+                    <button type="button" className="btn btn-success">
+                      Edit
+                    </button>
+                    <button type="button" className="btn btn-danger">
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </>
