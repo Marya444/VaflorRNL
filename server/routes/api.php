@@ -11,6 +11,6 @@ Route::controller(GenderController::class)->group(function () {
     Route::put('/updateGender/{gender}', 'updateGender');
 });
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+// Route::get('/user', function (Request $request) {
+//     return $request->user();
+// })->middleware('auth:sanctum');

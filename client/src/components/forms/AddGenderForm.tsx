@@ -1,14 +1,14 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import GenderServices from "../../services/GenderServices";
 import ErrorHandler from "../handler/ErrorHandler";
 import GenderFieldErrors from "../../interfaces/GenderFieldErrors";
 import SpinnerSmall from "../SpinnerSmall";
+import GenderService from "../../services/GenderService";
 
 interface AddGenderFormProps {
   onGenderAdded: (message: string) => void;
 }
 
-const AddGenderForm = ({onGenderAdded }: AddGenderFormProps) => {
+const AddGenderForm = ({ onGenderAdded }: AddGenderFormProps) => {
   const [state, setState] = useState({
     loadingStore: false,
     gender: "",
@@ -33,7 +33,7 @@ const AddGenderForm = ({onGenderAdded }: AddGenderFormProps) => {
       loadingStore: true,
     }));
 
-    GenderServices.storeGender(state)
+    GenderService.storeGender(state)
 
       .then((res) => {
         if (res.status === 200) {

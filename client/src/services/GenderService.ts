@@ -1,9 +1,19 @@
 import AxiosInstance from "../AxiosInstance";
 
-const GenderServices = {
+const GenderService = {
 
   loadGender: async () => {
     return AxiosInstance.get("/loadGenders")
+      .then((response) => response)
+      .catch((error) => {
+        throw error;
+      });
+  },
+
+  getGender: async (
+    genderId: number
+  ) => {
+    return AxiosInstance.get(`/getGender/${genderId}`)
       .then((response) => response)
       .catch((error) => {
         throw error;
@@ -20,4 +30,4 @@ const GenderServices = {
 };
 
 
-export default GenderServices;
+export default GenderService;

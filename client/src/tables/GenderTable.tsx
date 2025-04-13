@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
 import Genders from "../interfaces/Genders";
-import GenderServices from "../services/GenderServices";
+import GenderService from "../services/GenderService";
 import ErrorHandler from "../components/handler/ErrorHandler";
 import Spinner from "../components/Spinner";
 
 interface GenderTableProps {
-  refreshGenders:boolean;
+  refreshGenders: boolean;
 }
 
-const GenderTable = ({refreshGenders}: GenderTableProps) => {
+const GenderTable = ({ refreshGenders }: GenderTableProps) => {
   const [state, setState] = useState({
     loadingGenders: true,
     genders: [] as Genders[],
   });
 
   const handleLoadGenders = () => {
-    GenderServices.loadGender()
+    GenderService.loadGender()
       .then((res) => {
         if (res.status === 200) {
           setState((prevState) => ({
@@ -63,7 +63,7 @@ const GenderTable = ({refreshGenders}: GenderTableProps) => {
                 <Spinner />
               </td>
             </tr>
-          ) : (
+          ) : state.genders.length > 0 ? (
             state.genders.map((gender, index) => (
               <tr className="align-middle">
                 <td>{index + 1}</td>
@@ -80,6 +80,12 @@ const GenderTable = ({refreshGenders}: GenderTableProps) => {
                 </td>
               </tr>
             ))
+          ) : (
+            <tr className="align-middle">
+              <td colSpan={3} className="text-center">
+                No Genders Found
+              </td>
+            </tr>
           )}
         </tbody>
       </table>
