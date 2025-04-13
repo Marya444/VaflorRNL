@@ -20,15 +20,6 @@ const EditGenderForm = () => {
   };
 
   const handleGetGender = (genderId: number) => {
-    if (gender_id) {
-      const parsedGenderId = parseInt(gender_id);
-      handleGetGender(parsedGenderId);
-    }
-    setState((prevState) => ({
-      ...prevState,
-      loadingGet: true,
-    }));
-
     GenderService.getGender(genderId)
       .then((res) => {
         if (res.status === 200) {
