@@ -1,7 +1,6 @@
 import AxiosInstance from "../AxiosInstance";
 
 const GenderService = {
-
   loadGender: async () => {
     return AxiosInstance.get("/loadGenders")
       .then((response) => response)
@@ -10,9 +9,7 @@ const GenderService = {
       });
   },
 
-  getGender: async (
-    genderId: number
-  ) => {
+  getGender: async (genderId: number) => {
     return AxiosInstance.get(`/getGender/${genderId}`)
       .then((response) => response)
       .catch((error) => {
@@ -20,7 +17,7 @@ const GenderService = {
       });
   },
 
-   storeGender: async (data: any) => {
+  storeGender: async (data: any) => {
     return AxiosInstance.post("/storeGender", data)
       .then((response) => response)
       .catch((error) => {
@@ -30,10 +27,10 @@ const GenderService = {
 
   updateGender: async (genderId: number, data: any) => {
     return AxiosInstance.put(`/updateGender/${genderId}`, data)
-    .then((response) => response)
-    .catch((error) => {
-      throw error;
-    });
+      .then((response) => response)
+      .catch((error) => {
+        throw error;
+      });
   },
 
   destroyGender: async (genderId: number) => {
@@ -43,8 +40,6 @@ const GenderService = {
         throw error;
       });
   },
-
 };
-
 
 export default GenderService;

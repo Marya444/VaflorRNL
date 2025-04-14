@@ -1,5 +1,5 @@
 import AlertMessage from "../../components/AlertMessage";
-import DeleteGenderForm from "../../components/forms/DeleteGenderForm";
+import DeleteGenderForm from "../../components/forms/gender/DeleteGenderForm";
 import MainLayout from "./layout/MainLayout";
 import { useState } from "react";
 
@@ -11,7 +11,7 @@ const DeleteGender = () => {
   const handleShowAlertMessage = (
     message: string,
     isSuccess: boolean,
-    isVisible: boolean
+    isVisible: boolean,
   ) => {
     setMessage(message);
     setIsSuccess(isSuccess);
@@ -34,7 +34,11 @@ const DeleteGender = () => {
       />
       <div className="d-flex justify-content-center">
         <div className="col-md-3">
-          <DeleteGenderForm onDeleteGender={(message) => handleShowAlertMessage(message, true, true)}/>
+          <DeleteGenderForm
+            onDeleteGender={(message) =>
+              handleShowAlertMessage(message, true, true)
+            }
+          />
         </div>
       </div>
     </>

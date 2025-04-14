@@ -1,6 +1,6 @@
 import { useState } from "react";
 import AlertMessage from "../../components/AlertMessage";
-import EditGenderForm from "../../components/forms/EditGenderForm";
+import EditGenderForm from "../../components/forms/gender/EditGenderForm";
 import MainLayout from "./layout/MainLayout";
 
 const EditGender = () => {
@@ -11,7 +11,7 @@ const EditGender = () => {
   const handleShowAlertMessage = (
     message: string,
     isSuccess: boolean,
-    isVisible: boolean
+    isVisible: boolean,
   ) => {
     setMessage(message);
     setIsSuccess(isSuccess);

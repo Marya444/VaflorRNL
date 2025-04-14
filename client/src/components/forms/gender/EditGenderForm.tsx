@@ -1,10 +1,10 @@
 import { Link, useParams } from "react-router-dom";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import GenderService from "../../services/GenderService";
-import ErrorHandler from "../handler/ErrorHandler";
-import Spinner from "../Spinner";
-import GenderFieldErrors from "../../interfaces/GenderFieldErrors";
-import SpinnerSmall from "../SpinnerSmall";
+import GenderService from "../../../services/GenderService";
+import ErrorHandler from "../../handler/ErrorHandler";
+import Spinner from "../../Spinner";
+import GenderFieldErrors from "../../../interfaces/GenderFieldErrors";
+import SpinnerSmall from "../../SpinnerSmall";
 
 interface EditGenderFormProps {
   onGenderUpdate: (message: string) => void;
@@ -46,7 +46,7 @@ const EditGenderForm = ({ onGenderUpdate }: EditGenderFormProps) => {
         } else {
           console.error(
             "Unexpected status error while getting gender: ",
-            res.status
+            res.status,
           );
         }
       })
@@ -77,12 +77,12 @@ const EditGenderForm = ({ onGenderUpdate }: EditGenderFormProps) => {
             ...prevState,
             errors: {} as GenderFieldErrors,
           }));
-          
+
           onGenderUpdate(res.data.message);
         } else {
           console.error(
             "Unexpected status error while updating gender: ",
-            res.status
+            res.status,
           );
         }
       })

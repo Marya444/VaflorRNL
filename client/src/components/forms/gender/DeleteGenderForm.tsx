@@ -1,9 +1,9 @@
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { FormEvent, useEffect, useState } from "react";
-import GenderService from "../../services/GenderService";
-import ErrorHandler from "../handler/ErrorHandler";
-import Spinner from "../Spinner";
-import SpinnerSmall from "../SpinnerSmall";
+import GenderService from "../../../services/GenderService";
+import ErrorHandler from "../../handler/ErrorHandler";
+import Spinner from "../../Spinner";
+import SpinnerSmall from "../../SpinnerSmall";
 
 interface DeleteGenderFormProps {
   onDeleteGender: (message: string) => void;
@@ -58,7 +58,7 @@ const DeleteGenderForm = ({ onDeleteGender }: DeleteGenderFormProps) => {
         } else {
           console.error(
             "Unexpected status error while detroying gender: ",
-            res.status
+            res.status,
           );
         }
       })

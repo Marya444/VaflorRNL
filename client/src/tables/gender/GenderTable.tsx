@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import Genders from "../interfaces/Genders";
-import GenderService from "../services/GenderService";
-import ErrorHandler from "../components/handler/ErrorHandler";
-import Spinner from "../components/Spinner";
 import { Link } from "react-router-dom";
+import GenderService from "../../services/GenderService";
+import Genders from "../../interfaces/Genders";
+import ErrorHandler from "../../components/handler/ErrorHandler";
+import Spinner from "../../components/Spinner";
 
 interface GenderTableProps {
   refreshGenders: boolean;
@@ -26,7 +26,7 @@ const GenderTable = ({ refreshGenders }: GenderTableProps) => {
         } else {
           console.error(
             "Unexpected status error during loading genders:",
-            res.status
+            res.status,
           );
         }
       })

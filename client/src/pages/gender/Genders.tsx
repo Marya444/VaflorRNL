@@ -1,12 +1,11 @@
-import AddGenderForm from "../../components/forms/AddGenderForm";
-import GenderTable from "../../tables/GenderTable";
+import AddGenderForm from "../../components/forms/gender/AddGenderForm";
 import { useState } from "react";
 import MainLayout from "./layout/MainLayout";
 import AlertMessage from "../../components/AlertMessage";
+import GenderTable from "../../tables/gender/GenderTable";
 
 const Genders = () => {
-
-  const[refreshGenders, setRefreshGenders] = useState(false);
+  const [refreshGenders, setRefreshGenders] = useState(false);
 
   const [message, setMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
@@ -15,7 +14,7 @@ const Genders = () => {
   const handleShowAlertMessage = (
     message: string,
     isSuccess: boolean,
-    isVisible: boolean
+    isVisible: boolean,
   ) => {
     setMessage(message);
     setIsSuccess(isSuccess);
@@ -46,7 +45,7 @@ const Genders = () => {
           />
         </div>
         <div className="col-md-9">
-          <GenderTable refreshGenders={refreshGenders}/>
+          <GenderTable refreshGenders={refreshGenders} />
         </div>
       </div>
     </>

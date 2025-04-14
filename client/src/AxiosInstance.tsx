@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 const AxiosInstance = axios.create({
   baseURL: "http://127.0.0.1:8000/api",
@@ -30,7 +30,7 @@ AxiosInstance.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
-export default AxiosInstance
+export default AxiosInstance;

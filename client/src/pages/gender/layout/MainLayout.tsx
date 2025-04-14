@@ -1,21 +1,19 @@
-import Navbar from "../../../components/Navbar"
+import Navbar from "../../../components/Navbar";
 
 interface MainLayoutProps {
-    content: React.ReactNode
+  content: React.ReactNode;
 }
 
-
-const MainLayout = ({content}: MainLayoutProps) => {
+const MainLayout = ({ content }: MainLayoutProps) => {
   return (
     <>
-    <div className="container-fluid">
+      <div className="container-fluid">
         <Navbar />
+      </div>
 
-    </div>
-    
-    <div>{content}</div>
+      <div>{content}</div>
     </>
-  )
-}
+  );
+};
 
-export default MainLayout
+export default MainLayout;
