@@ -10,12 +10,12 @@ const router = createBrowserRouter([
   },
 
   {
-    path: "gender/edit/:gender_id",
+    path: "/gender/edit/:gender_id",
     element: <EditGender />,
   },
 
   {
-    path: "gender/delete",
+    path: "/gender/delete",
     element: <DeleteGender />,
   },
 ]);
