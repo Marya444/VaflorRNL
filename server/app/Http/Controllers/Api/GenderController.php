@@ -44,13 +44,23 @@ class GenderController extends Controller
         $validated = $request->validate([
             'gender' => ['required', 'min:4', 'max:10']
         ]);
-        $gender->update ([
+        $gender->update([
             'gender' => $validated['gender']
         ]);
 
         return response()->json([
-            'message' =>'Gender Successfully Updated.'
+            'message' => 'Gender Successfully Updated.'
         ], 200);
     }
 
+    public function destroyGender(Gender $gender)
+    {
+        $gender->update([
+            'is_deleted' => true
+        ]);
+
+        return response()->json([
+            'message' => 'Gender Successfully Deleted.'
+        ], 200);
+    }
 }
