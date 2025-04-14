@@ -10,7 +10,9 @@ class GenderController extends Controller
 {
     public function loadGenders()
     {
-        $genders = Gender::all();
+        $genders = Gender::where('tbl_genders.is_deleted', false)
+        ->get();
+
         return response()->json([
             'genders' => $genders
         ], 200);

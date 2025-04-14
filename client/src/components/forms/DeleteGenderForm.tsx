@@ -1,13 +1,16 @@
-import { Link, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { FormEvent, useEffect, useState } from "react";
 import GenderService from "../../services/GenderService";
 import ErrorHandler from "../handler/ErrorHandler";
+import Spinner from "../Spinner";
+import SpinnerSmall from "../SpinnerSmall";
 
 interface DeleteGenderFormProps {
   onDeleteGender: (message: string) => void;
 }
 const DeleteGenderForm = ({ onDeleteGender }: DeleteGenderFormProps) => {
   const { gender_id } = useParams();
+  const navigate = useNavigate();
   const [state, setState] = useState({
     loadingGet: true,
     loadingDestroy: false,
@@ -39,7 +42,9 @@ const DeleteGenderForm = ({ onDeleteGender }: DeleteGenderFormProps) => {
       });
   };
 
-  const handleDestroyGender = () => {
+  const handleDestroyGender = (e: FormEvent) => {
+    e.preventDefault();
+
     setState((prevState) => ({
       ...prevState,
       loadingDestroy: true,
@@ -48,7 +53,8 @@ const DeleteGenderForm = ({ onDeleteGender }: DeleteGenderFormProps) => {
     GenderService.destroyGender(state.gender_id)
       .then((res) => {
         if (res.status === 200) {
-          onDeleteGender(res.data.message); 
+          onDeleteGender(res.data.message);
+          navigate("/");
         } else {
           console.error(
             "Unexpected status error while detroying gender: ",
@@ -78,31 +84,52 @@ const DeleteGenderForm = ({ onDeleteGender }: DeleteGenderFormProps) => {
 
   return (
     <>
-    <form onSubmit={handleDestroyGender}>
-
-      <div className="form-group">
-        <div className="mb-3">
-          <label htmlFor="gender">Gender</label>
-          <input
-            type="text"
-            className="form-control"
-            name="gender"
-            id="gender"
-            value={state.gender}
-            readOnly
-          />
+      {state.loadingGet ? (
+        <div className="text-center mt-5">
+          <Spinner />
         </div>
-        <div className="d-flex justify-content-end">
-          <Link to={"/"} className="btn btn-secondary me-1">
-            NO
-          </Link>
-          <button type="submit" className="btn btn-danger">
-            YES
-          </button>
-        </div>
-      </div>
-
-    </form>
+      ) : (
+        <form onSubmit={handleDestroyGender}>
+          <h3>Are you sure you want to delete this gender?</h3>
+          <div className="form-group">
+            <div className="mb-3">
+              <label htmlFor="gender">Gender</label>
+              <input
+                type="text"
+                className="form-control"
+                name="gender"
+                id="gender"
+                value={state.gender}
+                readOnly
+              />
+            </div>
+            <div className="d-flex justify-content-end">
+              <Link
+                to={"/"}
+                className={`btn btn-secondary me-1 ${
+                  state.loadingDestroy ? "disabled" : ""
+                }`}
+              >
+                Back
+              </Link>
+              <button
+                type="submit"
+                className="btn btn-danger"
+                disabled={state.loadingDestroy}
+              >
+                {state.loadingDestroy ? (
+                  <>
+                    <SpinnerSmall />
+                    Deleting...
+                  </>
+                ) : (
+                  " YES"
+                )}
+              </button>
+            </div>
+          </div>
+        </form>
+      )}
     </>
   );
 };
