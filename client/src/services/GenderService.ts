@@ -27,6 +27,14 @@ const GenderService = {
         throw error;
       });
   },
+
+  updateGender: async (genderId: number, data: any) => {
+    return AxiosInstance.put(`/updateGender/${genderId}`, data)
+    .then((response) => response)
+    .catch((error) => {
+      throw error;
+    });
+  }
 };
 
 

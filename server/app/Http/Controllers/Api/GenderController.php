@@ -44,13 +44,13 @@ class GenderController extends Controller
         $validated = $request->validate([
             'gender' => ['required', 'min:4', 'max:10']
         ]);
-
-        $gender->update([
+        $gender->update ([
             'gender' => $validated['gender']
         ]);
 
         return response()->json([
-            'message' => 'Gender Successfully Updated.'
+            'message' =>'Gender Successfully Updated.'
         ], 200);
     }
+
 }
