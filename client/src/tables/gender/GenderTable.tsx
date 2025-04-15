@@ -66,7 +66,7 @@ const GenderTable = ({ refreshGenders }: GenderTableProps) => {
             </tr>
           ) : state.genders.length > 0 ? (
             state.genders.map((gender, index) => (
-              <tr className="align-middle">
+              <tr key={gender.gender_id} className="align-middle">
                 <td>{index + 1}</td>
                 <td>{gender.gender}</td>
                 <td>

@@ -10,7 +10,11 @@ interface AddUserFormProps {
   setLoadingStore: (loading: boolean) => void;
   onUserAdded: (message: string) => void;
 }
-const AddUserForm = ({ setSubmitForm, setLoadingStore, onUserAdded}: AddUserFormProps) => {
+const AddUserForm = ({
+  setSubmitForm,
+  setLoadingStore,
+  onUserAdded,
+}: AddUserFormProps) => {
   const [state, setState] = useState({
     loadingStore: false,
     loadingGenders: true,
@@ -28,6 +32,24 @@ const AddUserForm = ({ setSubmitForm, setLoadingStore, onUserAdded}: AddUserForm
     password_confirmation: "",
     errors: {} as UserFieldErrors,
   });
+
+  const handleResetNecessaryFields = () => {
+    setState((prevState) => ({
+      ...prevState,
+      first_name: "",
+      middle_name: "",
+      last_name: "",
+      suffix_name: "",
+      birth_date: "",
+      gender: "",
+      address: "",
+      contact_number: "",
+      email: "",
+      password: "",
+      password_confirmation: "",
+      errors: {} as UserFieldErrors,
+    }));
+  }
 
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -73,13 +95,11 @@ const AddUserForm = ({ setSubmitForm, setLoadingStore, onUserAdded}: AddUserForm
       ...prevState,
       loadingStore: true,
     }));
+  
     UserService.storeUser(state)
       .then((res) => {
         if (res.status === 200) {
-          setState((prevState) => ({
-            ...prevState,
-            errors: {} as UserFieldErrors,
-          }))
+          handleResetNecessaryFields();
           onUserAdded(res.data.message);
         } else {
           console.error(

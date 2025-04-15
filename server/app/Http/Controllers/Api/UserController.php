@@ -16,12 +16,12 @@ class UserController extends Controller
             'middle_name' => ['nullable'],
             'last_name' => ['required'],
             'suffix_name' => ['nullable'],
-            ' birth_date ' => ['required', 'date'],
+            'birth_date' => ['required', 'date'],
             'gender' => ['required'],
             'address' => ['required'],
             'contact_number' => ['required'],
             'email' => ['required', 'email', Rule::unique('tbl_users', 'email')],
-            'password' => ['required', 'confirm', 'min:8', 'max:15'],
+            'password' => ['required', 'confirmed', 'min:8', 'max:15'],
             'password_confirmation' => ['required', 'min:8', 'max:15'],
         ]);
 
