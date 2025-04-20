@@ -16,7 +16,7 @@ const GenderTable = ({ refreshGenders }: GenderTableProps) => {
   });
 
   const handleLoadGenders = () => {
-    GenderService.loadGender()
+    GenderService.loadGenders()
       .then((res) => {
         if (res.status === 200) {
           setState((prevState) => ({

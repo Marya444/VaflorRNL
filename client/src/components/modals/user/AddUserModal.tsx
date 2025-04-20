@@ -26,6 +26,13 @@ const AddUserModal = ({ showModal, onClose }: AddUserModalProps) => {
     setIsVisible(isVisible);
   };
 
+  const handleSubmit = () => {
+    if (submitFormRef.current) {
+      setLoadingStore(true);
+      submitFormRef.current();
+    }
+  };
+
   const handleCloseAlertMessage = () => {
     setMessage("");
     setIsSuccess(false);
@@ -56,9 +63,10 @@ const AddUserModal = ({ showModal, onClose }: AddUserModalProps) => {
               <AddUserForm
                 setSubmitForm={submitFormRef}
                 setLoadingStore={setLoadingStore}
-                onUserAdded={(message) =>
-                  handleShowAlertMessage(message, true, true)
-                }
+                onUserAdded={(message) => {
+                  setLoadingStore(false);
+                  handleShowAlertMessage(message, true, true);
+                }}
               />
             </div>
             <div className="modal-footer">
@@ -74,7 +82,7 @@ const AddUserModal = ({ showModal, onClose }: AddUserModalProps) => {
                 type="submit"
                 className="btn btn-primary"
                 disabled={loadingStore}
-                onClick={() => submitFormRef.current?.()}
+                onClick={handleSubmit}
               >
                 {loadingStore ? (
                   <>

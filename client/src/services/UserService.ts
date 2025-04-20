@@ -2,9 +2,11 @@ import AxiosInstance from "../AxiosInstance";
 
 const UserService = {
   loadUsers: async () => {
-    return AxiosInstance.get('/loadUsers').then(
-      (response) => response
-    ).catch((error) => {throw error});
+    return AxiosInstance.get('/loadUsers')
+    .then((response) => response)
+    .catch((error) => {
+      throw error
+    });
   }, 
 
   storeUser: async (data: any) => {

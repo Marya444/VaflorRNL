@@ -1,7 +1,7 @@
 import AxiosInstance from "../AxiosInstance";
 
 const GenderService = {
-  loadGender: async () => {
+  loadGenders: async () => {
     return AxiosInstance.get("/loadGenders")
       .then((response) => response)
       .catch((error) => {

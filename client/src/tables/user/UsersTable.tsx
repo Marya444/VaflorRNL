@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import MainLayout from "../../pages/gender/layout/MainLayout";
-import Users from "../../interfaces/Users";
 import UserService from "../../services/UserService";
 import ErrorHandler from "../../components/handler/ErrorHandler";
 import Spinner from "../../components/Spinner";
+import Users from "../../interfaces/Users";
 
 const UsersTable = () => {
   const [state, setState] = useState({
@@ -20,7 +19,7 @@ const UsersTable = () => {
             users: res.data.users,
           }));
         } else {
-          console.log(
+          console.error(
             "Unexpected status error while loading users: ",
             res.status
           );
@@ -41,24 +40,25 @@ const UsersTable = () => {
     let fullName = "";
 
     if (user.middle_name) {
-        fullName = `${user.last_name}, ${user.first_name} ${user.middle_name.charAt(0)}.`
+      fullName = `${user.last_name}, ${
+        user.first_name
+      }, ${user.middle_name.charAt(0)}.`;
     } else {
-        fullName = `${user.last_name}, ${user.first_name}`
+      fullName = `${user.last_name}, ${user.first_name}`;
     }
 
     if (user.suffix_name) {
-        fullName += `${user.suffix_name}`
-  }
+      fullName += `${user.suffix_name}`;
+    }
 
-  return fullName;
+    return fullName;
+  };
 
-}
-
-  useEffect (() => {
+  useEffect(() => {
     handleLoadUsers();
-  }, [])
+  }, []);
 
-  const content = (
+  return (
     <>
       <table className="table table-hover">
         <thead>
@@ -68,10 +68,11 @@ const UsersTable = () => {
             <th>Gender</th>
             <th>Birthdate</th>
             <th>Address</th>
-            <th>Contact No.</th>
+            <th>Contact Number</th>
             <th>Email</th>
           </tr>
         </thead>
+
         <tbody>
           {state.loadingUsers ? (
             <tr className="align-middle">
@@ -102,8 +103,6 @@ const UsersTable = () => {
       </table>
     </>
   );
-
-  return <MainLayout content={content} />;
 };
 
 export default UsersTable;

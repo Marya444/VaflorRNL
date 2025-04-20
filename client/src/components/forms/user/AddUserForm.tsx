@@ -16,7 +16,7 @@ const AddUserForm = ({
   onUserAdded,
 }: AddUserFormProps) => {
   const [state, setState] = useState({
-    loadingStore: false,
+    // loadingStore: false,
     loadingGenders: true,
     genders: [] as Genders[],
     first_name: "",
@@ -49,7 +49,7 @@ const AddUserForm = ({
       password_confirmation: "",
       errors: {} as UserFieldErrors,
     }));
-  }
+  };
 
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -61,7 +61,7 @@ const AddUserForm = ({
     }));
   };
   const handleLoadGenders = () => {
-    GenderService.loadGender()
+    GenderService.loadGenders()
       .then((res) => {
         if (res.status === 200) {
           setState((prevState) => ({
@@ -79,7 +79,10 @@ const AddUserForm = ({
         ErrorHandler(error, null);
       })
       .finally(() => {
-        setLoadingStore(false);
+        setState((prevState) => ({
+          ...prevState,
+          loadingGenders: false,
+        }));
       });
   };
 
@@ -87,7 +90,7 @@ const AddUserForm = ({
     e.preventDefault();
 
     setLoadingStore(true);
-  
+
     UserService.storeUser(state)
       .then((res) => {
         if (res.status === 200) {
@@ -106,6 +109,7 @@ const AddUserForm = ({
             ...prevState,
             errors: error.response.data.errors,
           }));
+          setLoadingStore(false);
         } else {
           ErrorHandler(error, null);
         }
