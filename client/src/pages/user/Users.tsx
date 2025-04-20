@@ -1,6 +1,7 @@
 import { useState } from "react";
 import AddUserModal from "../../components/modals/user/AddUserModal";
 import MainLayout from "../gender/layout/MainLayout";
+import UsersTable from "../../tables/user/UsersTable";
 
 const Users = () => {
   const [openAddUserModal, setOpenAddUserModal] = useState(false);
@@ -19,6 +20,7 @@ const Users = () => {
           Add User
         </button>
       </div>
+      <UsersTable />
     </>
   );
 

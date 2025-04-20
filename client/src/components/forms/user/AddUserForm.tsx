@@ -79,22 +79,14 @@ const AddUserForm = ({
         ErrorHandler(error, null);
       })
       .finally(() => {
-        setState((prevState) => ({
-          ...prevState,
-          loadingGenders: false,
-        }));
-
-        setLoadingStore(state.loadingStore);
+        setLoadingStore(false);
       });
   };
 
   const handleStoreUser = (e: FormEvent) => {
     e.preventDefault();
 
-    setState((prevState) => ({
-      ...prevState,
-      loadingStore: true,
-    }));
+    setLoadingStore(true);
   
     UserService.storeUser(state)
       .then((res) => {

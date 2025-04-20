@@ -34,7 +34,8 @@ class User extends Authenticatable
         'password',
     ];
 
-    public function gender(): BelongsTo {
+    public function gender(): BelongsTo
+    {
         return $this->belongsTo(Gender::class, 'gender_id', 'gender_id');
     }
 }

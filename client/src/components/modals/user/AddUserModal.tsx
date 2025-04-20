@@ -34,12 +34,6 @@ const AddUserModal = ({ showModal, onClose }: AddUserModalProps) => {
 
   return (
     <>
-      <AlertMessage
-        message={message}
-        isSuccess={isSuccess}
-        isVisible={isVisible}
-        onClose={handleCloseAlertMessage}
-      />
       <div
         className={`modal fade ${showModal ? "show d-block" : ""}`}
         tabIndex={-1}
@@ -51,6 +45,14 @@ const AddUserModal = ({ showModal, onClose }: AddUserModalProps) => {
               <h1 className="modal-title fs-5">Add User</h1>
             </div>
             <div className="modal-body">
+              <div className="mb-3">
+                <AlertMessage
+                  message={message}
+                  isSuccess={isSuccess}
+                  isVisible={isVisible}
+                  onClose={handleCloseAlertMessage}
+                />
+              </div>
               <AddUserForm
                 setSubmitForm={submitFormRef}
                 setLoadingStore={setLoadingStore}
