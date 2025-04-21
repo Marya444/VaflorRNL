@@ -46,7 +46,7 @@ const AddGenderForm = ({ onGenderAdded }: AddGenderFormProps) => {
         } else {
           console.error(
             "Unexpected status error during storing gender: ",
-            res.status,
+            res.status
           );
         }
       })
@@ -71,40 +71,46 @@ const AddGenderForm = ({ onGenderAdded }: AddGenderFormProps) => {
 
   return (
     <>
-      <form onSubmit={handleStoreGender}>
-        <div className="form-group">
-          <div className="mb-3 w-100">
-            <label htmlFor="gender">Gender</label>
-            <input
-              type="text"
-              className={`form-control text-center ${
-                state.errors.gender ? "is-invalid" : ""
-              }`}
-              id="gender"
-              name="gender"
-              value={state.gender}
-              onChange={handleInputChange}
-            />
-            {state.errors.gender && (
-              <p className="text-danger">{state.errors.gender[0]}</p>
-            )}
-          </div>
+      <form
+        onSubmit={handleStoreGender}
+        className="bg-white shadow-sm rounded-4 p-4 px-md-5 mt-3 mx-auto"
+        style={{ maxWidth: "600px" }}
+      >
+        <div className="mb-4">
+          <label htmlFor="gender" className="form-label fw-semibold">
+            Gender
+          </label>
+          <input
+            type="text"
+            id="gender"
+            name="gender"
+            className={`form-control rounded-3 ${
+              state.errors.gender ? "is-invalid" : ""
+            }`}
+            value={state.gender}
+            onChange={handleInputChange}
+          />
+          {state.errors.gender && (
+            <div className="text-danger mt-2 small">
+              {state.errors.gender[0]}
+            </div>
+          )}
+        </div>
 
-          <div className="d-flex justify-content-end">
-            <button
-              type="submit"
-              className="btn btn-primary"
-              disabled={state.loadingStore}
-            >
-              {state.loadingStore ? (
-                <>
-                  <SpinnerSmall /> Loading...
-                </>
-              ) : (
-                " Save"
-              )}
-            </button>
-          </div>
+        <div className="d-flex justify-content-end">
+          <button
+            type="submit"
+            className="btn btn-primary rounded-pill px-4"
+            disabled={state.loadingStore}
+          >
+            {state.loadingStore ? (
+              <>
+                <SpinnerSmall /> Saving...
+              </>
+            ) : (
+              "Save"
+            )}
+          </button>
         </div>
       </form>
     </>

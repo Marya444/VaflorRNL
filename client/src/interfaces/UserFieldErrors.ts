@@ -1,4 +1,4 @@
-interface UserFieldErrors {
+export interface UserFieldErrors {
 
     first_name?: string[];
     middle_name?: string[]; 
@@ -14,5 +14,3 @@ interface UserFieldErrors {
 
 
 }
-
-export default UserFieldErrors;
