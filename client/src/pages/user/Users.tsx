@@ -4,12 +4,14 @@ import MainLayout from "../gender/layout/MainLayout";
 import UsersTable from "../../tables/user/UsersTable";
 import EditUserModal from "../../components/modals/user/EditUserModal";
 import type { Users } from "../../interfaces/Users";
+import DeleteUserModal from "../../components/modals/user/DeleteUserModal";
 
 const Users = () => {
   const [refreshUsers, setRefreshUsers] = useState(false);
   const [selectedUser, setSelectedUser] = useState<Users | null>(null);
   const [openAddUserModal, setOpenAddUserModal] = useState(false);
   const [openEditUserModal, setOpenEditUserModal] = useState(false);
+  const [openDeleteUserModal, setOpenDeleteUserModal] = useState(false);
 
   const handleOpenEditUserModal = (user: Users) => {
     setSelectedUser(user);
@@ -20,6 +22,17 @@ const Users = () => {
     setSelectedUser(null);
     setOpenEditUserModal(false);
   };
+
+  const handleOpenDeleteUserModal = (user: Users) => {
+    setSelectedUser(user);
+    setOpenDeleteUserModal(true);
+  };
+
+  const handleCloseDeleteUserModal = () => {
+    setSelectedUser(null);
+    setOpenDeleteUserModal(false);
+  };
+
   const content = (
     <>
       <AddUserModal
@@ -33,6 +46,14 @@ const Users = () => {
         onClose={handleCloseEditUserModal}
         onRefreshUsers={() => setRefreshUsers(!refreshUsers)}
       />
+
+      <DeleteUserModal
+        showModal={openDeleteUserModal}
+        user={selectedUser}
+        onClose={() => handleCloseDeleteUserModal}
+        onRefreshUsers={() => setRefreshUsers(!refreshUsers)}
+      />
+
       <div className="d-flex justify-content-end mt-4 mb-2">
         <button
           type="button"
@@ -46,6 +67,7 @@ const Users = () => {
       <UsersTable
         refreshUsers={refreshUsers}
         onEditUser={handleOpenEditUserModal}
+        onDeleteUser={handleOpenDeleteUserModal}
       />
     </>
   );

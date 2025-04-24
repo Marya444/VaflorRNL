@@ -122,9 +122,14 @@ const EditGenderForm = ({ onGenderUpdate }: EditGenderFormProps) => {
         </div>
       ) : (
         <form onSubmit={handleUpdateGender}>
-          <div className="form-group">
-            <div className="mb-3">
-              <label htmlFor="gender">Gender</label>
+          <div
+            className="bg-white shadow-sm rounded-4 p-4 px-md-5 w-100"
+            style={{ maxWidth: "600px" }}
+          >
+            <div className="mb-4">
+              <label htmlFor="gender" className="form-label">
+                Gender
+              </label>
               <input
                 type="text"
                 className={`form-control ${
@@ -134,13 +139,15 @@ const EditGenderForm = ({ onGenderUpdate }: EditGenderFormProps) => {
                 id="gender"
                 value={state.gender}
                 onChange={handleInputChange}
+                placeholder="Enter gender"
               />
               {state.errors.gender && (
-                <p className="text-danger">{state.errors.gender[0]}</p>
+                <p className="text-danger mt-2">{state.errors.gender[0]}</p>
               )}
             </div>
-            <div className="d-flex justify-content-end">
-              <Link to={"/"} className="btn btn-secondary me-1">
+
+            <div className="d-flex justify-content-between align-items-center">
+              <Link to="/" className="btn btn-outline-secondary">
                 Back
               </Link>
               <button

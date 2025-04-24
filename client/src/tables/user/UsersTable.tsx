@@ -7,9 +7,10 @@ import { Users } from "../../interfaces/Users";
 interface UsersTable {
   refreshUsers: boolean;
   onEditUser: (user: Users) => void;
+  onDeleteUser: (user: Users) => void;
 }
 
-const UsersTable = ({ refreshUsers, onEditUser }: UsersTable) => {
+const UsersTable = ({ refreshUsers, onEditUser, onDeleteUser }: UsersTable) => {
   const [state, setState] = useState({
     loadingUsers: true,
     users: [] as Users[],
@@ -110,6 +111,7 @@ const UsersTable = ({ refreshUsers, onEditUser }: UsersTable) => {
                           <button
                             type="button"
                             className="btn btn-outline-danger btn-sm rounded-pill px-3"
+                            onClick={()=> onDeleteUser(user)}
                           >
                             Delete
                           </button>

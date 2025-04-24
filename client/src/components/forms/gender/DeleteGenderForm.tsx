@@ -90,10 +90,18 @@ const DeleteGenderForm = ({ onDeleteGender }: DeleteGenderFormProps) => {
         </div>
       ) : (
         <form onSubmit={handleDestroyGender}>
-          <h3>Are you sure you want to delete this gender?</h3>
-          <div className="form-group">
-            <div className="mb-3">
-              <label htmlFor="gender">Gender</label>
+          <div
+            className="bg-white shadow-sm rounded-4 p-4 px-md-5 w-100"
+            style={{ maxWidth: "600px" }}
+          >
+            <h3 className="text-center mb-4">
+              Are you sure you want to delete this gender?
+            </h3>
+
+            <div className="mb-4">
+              <label htmlFor="gender" className="form-label">
+                Gender
+              </label>
               <input
                 type="text"
                 className="form-control"
@@ -101,12 +109,14 @@ const DeleteGenderForm = ({ onDeleteGender }: DeleteGenderFormProps) => {
                 id="gender"
                 value={state.gender}
                 readOnly
+                placeholder="Gender to be deleted"
               />
             </div>
-            <div className="d-flex justify-content-end">
+
+            <div className="d-flex justify-content-between align-items-center">
               <Link
-                to={"/"}
-                className={`btn btn-secondary me-1 ${
+                to="/"
+                className={`btn btn-outline-secondary ${
                   state.loadingDestroy ? "disabled" : ""
                 }`}
               >
@@ -119,11 +129,10 @@ const DeleteGenderForm = ({ onDeleteGender }: DeleteGenderFormProps) => {
               >
                 {state.loadingDestroy ? (
                   <>
-                    <SpinnerSmall />
-                    Deleting...
+                    <SpinnerSmall /> Deleting...
                   </>
                 ) : (
-                  " YES"
+                  "Delete"
                 )}
               </button>
             </div>

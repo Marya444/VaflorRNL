@@ -32,8 +32,11 @@ const DeleteGender = () => {
         isVisible={isVisible}
         onClose={handleCloseAlertMessage}
       />
-      <div className="d-flex justify-content-center">
-        <div className="col-md-3">
+      <div className="d-flex justify-content-center mt-4">
+        <div
+          className="bg-white shadow-sm rounded-4 p-4 px-md-5 w-100"
+          style={{ maxWidth: "600px" }}
+        >
           <DeleteGenderForm
             onDeleteGender={(message) =>
               handleShowAlertMessage(message, true, true)
