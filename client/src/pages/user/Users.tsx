@@ -50,7 +50,7 @@ const Users = () => {
       <DeleteUserModal
         showModal={openDeleteUserModal}
         user={selectedUser}
-        onClose={() => handleCloseDeleteUserModal}
+        onClose={() => handleCloseDeleteUserModal()} 
         onRefreshUsers={() => setRefreshUsers(!refreshUsers)}
       />
 

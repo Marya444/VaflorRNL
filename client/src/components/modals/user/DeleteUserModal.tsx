@@ -95,6 +95,7 @@ const DeleteUserModal = ({
                 className="btn btn-danger rounded-3 px-4"
                 disabled={loadingDestroy}
                 onClick={() => submitFormRef.current?.()}
+
               >
                 {loadingDestroy ? (
                   <>
