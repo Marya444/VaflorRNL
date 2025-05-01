@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../context/AuthContext";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { LogInFieldErrors } from "../../../interfaces/LogInFieldErrors";
-import ErrorHandler from "../../handler/ErrorHandler";
 import SpinnerSmall from "../../SpinnerSmall";
 import AlertMessage from "../../AlertMessage";
+import { LogInFieldErrors } from "../../../interfaces/LogInFieldErrors";
+import { useAuth } from "../../../context/AuthContext";
+import ErrorHandler from "../../handler/ErrorHandler";
 
 const LogInForm = () => {
   const { login } = useAuth();
@@ -23,6 +23,7 @@ const LogInForm = () => {
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+
     setState((prevState) => ({
       ...prevState,
       [name]: value,
@@ -35,6 +36,7 @@ const LogInForm = () => {
     setState((prevState) => ({
       ...prevState,
       loadingLogin: true,
+      errors: {},
     }));
 
     login(state.email, state.password)
@@ -71,7 +73,11 @@ const LogInForm = () => {
     setIsVisible(isVisible);
   };
 
-  const handleCloseAlertMessage = () => {};
+  const handleCloseAlertMessage = () => {
+    setMessage("");
+    setIsSuccess(false);
+    setIsVisible(false);
+  };
 
   return (
     <>
@@ -86,8 +92,7 @@ const LogInForm = () => {
           className="card shadow rounded-4 p-4"
           style={{ width: "100%", maxWidth: "400px" }}
         >
-          <h4 className="mb-4 text-center fw-semibold">Hello</h4>
-
+          <h4 className="mb-4 text-center fw-semibold">Welcome Back</h4>
           <form onSubmit={handleLogin}>
             <div className="mb-3">
               <label htmlFor="email" className="form-label">
@@ -95,9 +100,9 @@ const LogInForm = () => {
               </label>
               <input
                 type="email"
-                className={`form-control ${
+                className={`form-control form-control-lg ${
                   state.errors.email ? "is-invalid" : ""
-                } form-control-lg`}
+                }`}
                 id="email"
                 name="email"
                 value={state.email}
@@ -105,9 +110,8 @@ const LogInForm = () => {
                 onChange={handleInputChange}
                 autoFocus
               />
-
               {state.errors.email && (
-                <span className="text-danger">{state.errors.email}</span>
+                <span className="text-danger">{state.errors.email[0]}</span>
               )}
             </div>
 
@@ -117,18 +121,17 @@ const LogInForm = () => {
               </label>
               <input
                 type="password"
-                className={`form-control ${
+                className={`form-control form-control-lg ${
                   state.errors.password ? "is-invalid" : ""
-                } form-control-lg`}
+                }`}
                 id="password"
                 name="password"
                 value={state.password}
                 placeholder="Enter your password"
                 onChange={handleInputChange}
               />
-
               {state.errors.password && (
-                <span className="text-danger">{state.errors.password}</span>
+                <span className="text-danger">{state.errors.password[0]}</span>
               )}
             </div>
 
@@ -139,10 +142,10 @@ const LogInForm = () => {
             >
               {state.loadingLogin ? (
                 <>
-                  <SpinnerSmall /> Logging in...{" "}
+                  <SpinnerSmall /> Logging in...
                 </>
               ) : (
-                "Log in"
+                "Log In"
               )}
             </button>
           </form>

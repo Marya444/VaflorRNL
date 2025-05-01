@@ -46,7 +46,7 @@ const EditGenderForm = ({ onGenderUpdate }: EditGenderFormProps) => {
         } else {
           console.error(
             "Unexpected status error while getting gender: ",
-            res.status,
+            res.status
           );
         }
       })
@@ -82,7 +82,7 @@ const EditGenderForm = ({ onGenderUpdate }: EditGenderFormProps) => {
         } else {
           console.error(
             "Unexpected status error while updating gender: ",
-            res.status,
+            res.status
           );
         }
       })
@@ -147,7 +147,7 @@ const EditGenderForm = ({ onGenderUpdate }: EditGenderFormProps) => {
             </div>
 
             <div className="d-flex justify-content-between align-items-center">
-              <Link to="/" className="btn btn-outline-secondary">
+              <Link to="/genders" className="btn btn-outline-secondary">
                 Back
               </Link>
               <button

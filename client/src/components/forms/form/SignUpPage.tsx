@@ -1,47 +1,30 @@
-import { useRef, useState } from "react";
-import AddUserForm from "../user/AddUserForm";
-import AlertMessage from "../../AlertMessage";
+// import { useState, useRef } from "react";
+// import { Link } from "react-router-dom";
+// import AddUserForm from "../user/AddUserForm";
 
-const SignUpPage = () => {
-  const submitForm = useRef<(() => void) | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
+// const SignUpPage = () => {
+//   const [loading, setLoading] = useState(false);
+//   const setSubmitForm = useRef(null); // Ref for form submission
 
-  const handleSubmit = () => {
-    if (submitForm.current) {
-      submitForm.current();
-    }
-  };
+//   const onUserAdded = (message) => {
+//     // Handle successful user addition (you can show a success message or redirect)
+//     alert(message);
+//     window.location.href = "/login"; // Redirect to login after successful signup
+//   };
 
-  const handleUserAdded = (message: string) => {
-    setSuccessMessage(message);
-  };
+//   return (
+//     <div>
+//       <h2>Create a New Account</h2>
+//       <AddUserForm
+//         setSubmitForm={setSubmitForm}
+//         setLoadingStore={setLoading}
+//         onUserAdded={onUserAdded}
+//       />
+//       <p>
+//         Already have an account? <Link to="/login">Log in here</Link>
+//       </p>
+//     </div>
+//   );
+// };
 
-  return (
-    <div className="container py-5">
-      <h2 className="mb-4">Sign Up</h2>
-
-      {successMessage && (
-        <AlertMessage variant="success">{successMessage}</AlertMessage>
-      )}
-
-      <AddUserForm
-        setSubmitForm={submitForm}
-        setLoadingStore={setLoading}
-        onUserAdded={handleUserAdded}
-      />
-
-      <div className="mt-3">
-        <button
-          className="btn btn-primary"
-          onClick={handleSubmit}
-          disabled={loading}
-        >
-          {loading ? "Submitting..." : "Sign Up"}
-        </button>
-      </div>
-    </div>
-  );
-};
-
-export default SignUpPage;
+// export default SignUpPage;

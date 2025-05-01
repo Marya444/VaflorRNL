@@ -73,13 +73,13 @@ const GenderTable = ({ refreshGenders }: GenderTableProps) => {
                   <td className="text-center">
                     <div className="d-flex justify-content-center gap-2">
                       <Link
-                        to={`gender/edit/${gender.gender_id}`}
+                        to={`/gender/edit/${gender.gender_id}`}
                         className="btn btn-sm btn-outline-success rounded-pill px-3"
                       >
                         Edit
                       </Link>
                       <Link
-                        to={`gender/delete/${gender.gender_id}`}
+                        to={`/gender/delete/${gender.gender_id}`}
                         className="btn btn-sm btn-outline-danger rounded-pill px-3"
                       >
                         Delete

@@ -4,7 +4,7 @@ import { FormEvent, useState } from "react";
 import SpinnerSmall from "./SpinnerSmall";
 
 const Navbar = () => {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const navigate = useNavigate();
 
   const [loadingLogout, setLoadingLogout] = useState(false);
@@ -31,18 +31,14 @@ const Navbar = () => {
   };
 
   const handleUserFullName = () => {
-    const user = localStorage.getItem("user");
-    const parsedUser = user ? JSON.parse(user) : null;
+    if (!user) return "Guest"; 
 
-    let fullName = "";
-    if (parsedUser) {
-      fullName = `${parsedUser.last_name}, ${parsedUser.first_name}`;
-      if (parsedUser.middle_name) {
-        fullName += ` ${parsedUser.middle_name.charAt(0)}.`;
-      }
-      if (parsedUser.suffix_name) {
-        fullName += ` ${parsedUser.suffix_name}`;
-      }
+    let fullName = `${user.last_name}, ${user.first_name}`;
+    if (user.middle_name) {
+      fullName += ` ${user.middle_name.charAt(0)}.`;
+    }
+    if (user.suffix_name) {
+      fullName += ` ${user.suffix_name}`;
     }
 
     return fullName;

@@ -1,19 +1,15 @@
 import { useEffect } from "react";
 import LogInForm from "../../components/forms/form/LogInForm";
 
-
-
-
-
 const Login = () => {
-    useEffect(() => {
+  useEffect(() => {
     document.title = "Login Page";
-}, []);
-    return (
-        <>
-        <LogInForm />
-        </>
-    );
+  }, []);
+  return (
+    <>
+      <LogInForm />
+    </>
+  );
 };
 
 export default Login;

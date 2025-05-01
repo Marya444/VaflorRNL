@@ -5,7 +5,6 @@ import EditGender from "./pages/gender/EditGender";
 import Users from "./pages/user/Users";
 import LogIn from "./pages/login/LogIn";
 import { AuthProvider } from "./context/AuthContext";
-// import SignUpPage from "./components/forms/form/SignUpPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const router = createBrowserRouter([
@@ -14,16 +13,11 @@ const router = createBrowserRouter([
     element: <LogIn />,
   },
 
-  // {
-  //   path: "/signup",
-  //   element: <SignUpPage />,
-  // },
-
   {
     path: "/genders",
     element: (
       <ProtectedRoute>
-        <Genders />
+      <Genders />
       </ProtectedRoute>
     ),
   },
@@ -32,7 +26,7 @@ const router = createBrowserRouter([
     path: "/gender/edit/:gender_id",
     element: (
       <ProtectedRoute>
-        <EditGender />
+      <EditGender />
       </ProtectedRoute>
     ),
   },
@@ -41,17 +35,16 @@ const router = createBrowserRouter([
     path: "/gender/delete/:gender_id",
     element: (
       <ProtectedRoute>
-        <DeleteGender />
+      <DeleteGender />
       </ProtectedRoute>
     ),
   },
 
   {
     path: "/users",
-
     element: (
       <ProtectedRoute>
-        <Users />
+      <Users />
       </ProtectedRoute>
     ),
   },

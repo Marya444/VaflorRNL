@@ -54,11 +54,11 @@ const DeleteGenderForm = ({ onDeleteGender }: DeleteGenderFormProps) => {
       .then((res) => {
         if (res.status === 200) {
           onDeleteGender(res.data.message);
-          navigate("/");
+          navigate("/genders");
         } else {
           console.error(
             "Unexpected status error while detroying gender: ",
-            res.status,
+            res.status
           );
         }
       })
@@ -115,7 +115,7 @@ const DeleteGenderForm = ({ onDeleteGender }: DeleteGenderFormProps) => {
 
             <div className="d-flex justify-content-between align-items-center">
               <Link
-                to="/"
+                to="/genders"
                 className={`btn btn-outline-secondary ${
                   state.loadingDestroy ? "disabled" : ""
                 }`}
